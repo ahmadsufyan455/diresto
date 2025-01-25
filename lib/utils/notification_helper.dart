@@ -24,9 +24,9 @@ class NotificationHelper {
         const AndroidInitializationSettings('mipmap/ic_launcher');
 
     var initializationSettingsIOS = const DarwinInitializationSettings(
-      requestAlertPermission: false,
-      requestBadgePermission: false,
-      requestSoundPermission: false,
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
     );
 
     var initializationSettings = InitializationSettings(
