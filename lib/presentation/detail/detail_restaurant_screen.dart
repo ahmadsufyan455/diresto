@@ -119,7 +119,7 @@ class DetailData extends StatelessWidget {
           builder: (context, scrollController) {
             return Container(
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.background,
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(16.0),
                 ),
@@ -362,7 +362,7 @@ class DetailData extends StatelessWidget {
                                           return ElevatedButton(
                                             style: const ButtonStyle(
                                               backgroundColor:
-                                                  MaterialStatePropertyAll(
+                                                  WidgetStatePropertyAll(
                                                 Colors.deepPurple,
                                               ),
                                             ),
