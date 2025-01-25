@@ -42,14 +42,15 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     itemCount: data.length,
                     itemBuilder: (context, index) {
                       return InkWell(
-                        onTap: () => Navigator.pushNamed(
-                          context,
-                          DetailRestaurantScreen.routeName,
-                          arguments: data[index].id,
-                        ).then(
-                          (value) => BlocProvider.of<FavoriteCubit>(context)
-                              .loadFavorite(),
-                        ),
+                        onTap: () async {
+                          await Navigator.pushNamed(
+                            context,
+                            DetailRestaurantScreen.routeName,
+                            arguments: data[index].id,
+                          );
+                          if (!context.mounted) return;
+                          context.read<FavoriteCubit>().loadFavorite();
+                        },
                         child: ItemRestaurant(restaurant: data[index]),
                       );
                     },
