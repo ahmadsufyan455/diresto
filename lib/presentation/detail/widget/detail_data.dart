@@ -351,16 +351,13 @@ class DetailData extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 10.0),
-                      SizedBox(
-                        height: 80,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: data.customerReviews.length,
-                          itemBuilder: (context, index) {
-                            return ItemReview(
-                                data: data.customerReviews[index]);
-                          },
-                        ),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: data.customerReviews.length,
+                        itemBuilder: (context, index) {
+                          return ItemReview(data: data.customerReviews[index]);
+                        },
                       ),
                     ],
                   ),

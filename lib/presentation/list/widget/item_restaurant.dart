@@ -14,6 +14,7 @@ class ItemRestaurant extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Card(
         elevation: 4.0,
+        shadowColor: Colors.grey.withValues(alpha: 0.2),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

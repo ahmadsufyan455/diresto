@@ -26,7 +26,7 @@ class SettingsScreen extends StatelessWidget {
               ListTile(
                 title: Text(
                   'Reminder at 11 AM',
-                  style: TextStyles.body.copyWith(fontWeight: FontWeight.w600),
+                  style: TextStyles.body,
                 ),
                 trailing: Switch.adaptive(
                   value: state,
