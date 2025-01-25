@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
+import 'package:diresto/injection.dart' as di;
 import 'package:diresto/presentation/detail/bloc/add_review_bloc.dart';
 import 'package:diresto/presentation/detail/bloc/detail_restaurant_bloc.dart';
 import 'package:diresto/presentation/detail/bloc/favorite_bloc.dart';
@@ -19,7 +20,6 @@ import 'package:diresto/utils/background_service.dart';
 import 'package:diresto/utils/notification_helper.dart';
 import 'package:diresto/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:diresto/injection.dart' as di;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';

@@ -53,11 +53,11 @@ class _SearchScreenState extends State<SearchScreen> {
                           );
                         });
                       },
+                      style: TextStyles.body,
                       decoration: InputDecoration(
                         prefixIcon: const Icon(Icons.search),
                         hintText: 'Search restaurants...',
                         hintStyle: TextStyles.body,
-                        isDense: true,
                         enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(color: Colors.grey),
                             borderRadius: BorderRadius.circular(20.0)),

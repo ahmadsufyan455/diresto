@@ -37,11 +37,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/empty_box.png
-    - assets/resto.json
-    - assets/halal.png
-    - assets/error_data.png
+    - assets/
   fonts:
-    - family: Montserrat
+    - family: Poppins
       fonts:
-        - asset: assets/fonts/montserrat_regular.ttf
+        - asset: assets/fonts/poppins_regular.ttf

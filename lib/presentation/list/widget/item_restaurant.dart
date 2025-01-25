@@ -28,9 +28,8 @@ class ItemRestaurant extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   fit: BoxFit.cover,
                   imageUrl: baseImageURL + restaurant.pictureId,
-                  progressIndicatorBuilder: (_, __, downloadProgress) =>
-                      CircularProgressIndicator(
-                    value: downloadProgress.progress,
+                  placeholder: (context, url) => Image.asset(
+                    'assets/placeholder.jpg',
                   ),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
