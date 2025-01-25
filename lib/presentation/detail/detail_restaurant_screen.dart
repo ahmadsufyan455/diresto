@@ -144,41 +144,46 @@ class DetailData extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(data.name, style: TextStyles.title),
-                            const SizedBox(height: 4.0),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.yellow.shade700,
-                                ),
-                                Text(
-                                  '(${data.rating})',
-                                  style: TextStyles.body,
-                                )
-                              ],
-                            ),
-                            const SizedBox(height: 4.0),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.location_on,
-                                  color: Colors.red.shade300,
-                                ),
-                                Text(
-                                  data.city,
-                                  style: TextStyles.body,
-                                ),
-                                Text(
-                                  ' (${data.address})',
-                                  style: TextStyles.body,
-                                ),
-                              ],
-                            )
-                          ],
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(data.name, style: TextStyles.title),
+                              const SizedBox(height: 4.0),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.yellow.shade700,
+                                  ),
+                                  Text(
+                                    '(${data.rating})',
+                                    style: TextStyles.body,
+                                  )
+                                ],
+                              ),
+                              const SizedBox(height: 4.0),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.location_on,
+                                    color: Colors.red.shade300,
+                                  ),
+                                  Text(
+                                    data.city,
+                                    style: TextStyles.body,
+                                  ),
+                                  Flexible(
+                                    child: Text(
+                                      ' (${data.address})',
+                                      style: TextStyles.body,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                         ButtonFavorite(
                             data: data, isAddedToFavorite: isAddedToFavorite),
