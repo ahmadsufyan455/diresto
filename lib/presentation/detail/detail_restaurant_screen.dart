@@ -44,7 +44,6 @@ class _DetailRestaurantScreenState extends State<DetailRestaurantScreen> {
     );
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Restaurant Detail', style: TextStyles.title),
       ),

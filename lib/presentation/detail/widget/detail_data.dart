@@ -135,7 +135,7 @@ class DetailData extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.label_important_outline_rounded,
-                            color: Colors.deepPurple.shade300,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                           const SizedBox(width: 10.0),
                           Expanded(
@@ -150,7 +150,6 @@ class DetailData extends StatelessWidget {
                                       .toList();
                                   return ItemMenu(
                                     name: categories[index],
-                                    color: Colors.deepPurple.shade100,
                                   );
                                 },
                               ),
@@ -260,31 +259,31 @@ class DetailData extends StatelessWidget {
                                                   .add(LoadDetailRestaurant(
                                                       id: data.id));
                                               ScaffoldMessenger.of(context)
-                                                  .showSnackBar(SnackBar(
-                                                      duration: const Duration(
-                                                        seconds: 1,
-                                                      ),
-                                                      content: Text(
-                                                        'Your review has been added',
-                                                        style: TextStyles.body
-                                                            .copyWith(
-                                                          color: Colors.white,
-                                                        ),
-                                                      )));
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  duration: const Duration(
+                                                    seconds: 1,
+                                                  ),
+                                                  content: Text(
+                                                    'Your review has been added',
+                                                    style: TextStyles.body,
+                                                  ),
+                                                ),
+                                              );
                                             } else if (state
                                                 is AddReviewError) {
                                               ScaffoldMessenger.of(context)
-                                                  .showSnackBar(SnackBar(
-                                                      duration: const Duration(
-                                                        seconds: 1,
-                                                      ),
-                                                      content: Text(
-                                                        state.message,
-                                                        style: TextStyles.body
-                                                            .copyWith(
-                                                          color: Colors.white,
-                                                        ),
-                                                      )));
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  duration: const Duration(
+                                                    seconds: 1,
+                                                  ),
+                                                  content: Text(
+                                                    state.message,
+                                                    style: TextStyles.body,
+                                                  ),
+                                                ),
+                                              );
                                             }
                                           },
                                           builder: (context, state) {
@@ -295,12 +294,6 @@ class DetailData extends StatelessWidget {
                                               );
                                             }
                                             return ElevatedButton(
-                                              style: const ButtonStyle(
-                                                backgroundColor:
-                                                    WidgetStatePropertyAll(
-                                                  Colors.deepPurple,
-                                                ),
-                                              ),
                                               onPressed: () {
                                                 final requestData =
                                                     RequestReview(
@@ -318,9 +311,7 @@ class DetailData extends StatelessWidget {
                                               },
                                               child: Text(
                                                 'Add Review',
-                                                style: TextStyles.body.copyWith(
-                                                  color: Colors.white,
-                                                ),
+                                                style: TextStyles.body,
                                               ),
                                             );
                                           },
@@ -335,15 +326,11 @@ class DetailData extends StatelessWidget {
                               children: [
                                 const Icon(
                                   Icons.reviews_rounded,
-                                  color: Colors.deepPurple,
                                 ),
                                 const SizedBox(width: 6.0),
                                 Text(
                                   'Add Review',
-                                  style: TextStyles.body.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.deepPurple,
-                                  ),
+                                  style: TextStyles.body,
                                 )
                               ],
                             ),

@@ -16,6 +16,7 @@ import 'package:diresto/presentation/search/search_screen.dart';
 import 'package:diresto/presentation/settings/cubit/settings_cubit.dart';
 import 'package:diresto/presentation/settings/settings_screen.dart';
 import 'package:diresto/presentation/splash/splash_screen.dart';
+import 'package:diresto/theme/theme.dart';
 import 'package:diresto/utils/background_service.dart';
 import 'package:diresto/utils/notification_helper.dart';
 import 'package:diresto/utils/utils.dart';
@@ -67,10 +68,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Diresto App',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
+        theme: lightMode,
+        darkTheme: darkMode,
         home: const SplashScreen(),
         navigatorObservers: [routeObserver],
         onGenerateRoute: (settings) {

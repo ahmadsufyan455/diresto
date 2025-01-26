@@ -32,7 +32,7 @@ class _ButtonFavoriteState extends State<ButtonFavorite> {
               duration: const Duration(seconds: 1),
               content: Text(
                 state.message,
-                style: TextStyles.body.copyWith(color: Colors.white),
+                style: TextStyles.body,
               ),
             ),
           );
@@ -43,7 +43,7 @@ class _ButtonFavoriteState extends State<ButtonFavorite> {
               duration: const Duration(seconds: 1),
               content: Text(
                 state.message,
-                style: TextStyles.body.copyWith(color: Colors.white),
+                style: TextStyles.body,
               ),
             ),
           );

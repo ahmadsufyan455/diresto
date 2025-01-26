@@ -58,20 +58,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         prefixIcon: const Icon(Icons.search),
                         hintText: 'Search restaurants...',
                         hintStyle: TextStyles.body,
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(20.0)),
-                        disabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                          borderSide: BorderSide(
-                            color: Theme.of(context).primaryColor,
-                            width: 2.0,
-                          ),
-                        ),
+                        isDense: true,
                       ),
                     ),
                   ),

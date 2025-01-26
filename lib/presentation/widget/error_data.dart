@@ -27,12 +27,15 @@ class ErrorData extends StatelessWidget {
                 Text(
                   'Try Again',
                   style: TextStyles.body.copyWith(
-                    color: Colors.deepPurple,
+                    color: Theme.of(context).colorScheme.secondary,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
                 const SizedBox(width: 4.0),
-                const Icon(Icons.refresh_rounded, color: Colors.deepPurple),
+                Icon(
+                  Icons.refresh_rounded,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
               ],
             ),
           ),

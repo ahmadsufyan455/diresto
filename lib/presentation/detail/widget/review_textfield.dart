@@ -26,20 +26,6 @@ class ReviewTextField extends StatelessWidget {
         hintText: hint,
         hintStyle: TextStyles.body,
         isDense: true,
-        enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.grey),
-            borderRadius: BorderRadius.circular(20.0)),
-        disabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.grey),
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20.0),
-          borderSide: BorderSide(
-            color: Theme.of(context).primaryColor,
-            width: 2.0,
-          ),
-        ),
       ),
     );
   }
