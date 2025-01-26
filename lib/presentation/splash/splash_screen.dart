@@ -1,7 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:diresto/presentation/home/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatelessWidget {
   static const routeName = '/splash_screen';
@@ -10,11 +9,12 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
-      splash: Lottie.asset('assets/resto.json'),
+      splash: Image.asset('assets/resto.png'),
       nextScreen: const HomeScreen(),
-      splashIconSize: 250,
-      duration: 3000,
-      splashTransition: SplashTransition.fadeTransition,
+      splashIconSize: 150,
+      duration: 2000,
+      splashTransition: SplashTransition.rotationTransition,
+      backgroundColor: Theme.of(context).colorScheme.surface,
     );
   }
 }

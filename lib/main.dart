@@ -65,42 +65,45 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => di.locator<FavoriteCubit>()),
         BlocProvider(create: (context) => di.locator<SettingsCubit>()),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Diresto App',
-        theme: lightMode,
-        darkTheme: darkMode,
-        home: const SplashScreen(),
-        navigatorObservers: [routeObserver],
-        onGenerateRoute: (settings) {
-          switch (settings.name) {
-            case HomeScreen.routeName:
-              return MaterialPageRoute(builder: (_) => const HomeScreen());
-            case ListRestaurantScreen.routeName:
-              return MaterialPageRoute(
-                  builder: (_) => const ListRestaurantScreen());
-            case DetailRestaurantScreen.routeName:
-              final id = settings.arguments as String;
-              return MaterialPageRoute(
-                builder: (_) => DetailRestaurantScreen(id: id),
-                settings: settings,
-              );
-            case SearchScreen.routeName:
-              return MaterialPageRoute(builder: (_) => const SearchScreen());
-            case SettingsScreen.routeName:
-              return MaterialPageRoute(builder: (_) => const SettingsScreen());
-            case FavoriteScreen.routeName:
-              return MaterialPageRoute(builder: (_) => const FavoriteScreen());
-            default:
-              return MaterialPageRoute(builder: (_) {
-                return const Scaffold(
-                  body: Center(
-                    child: Text('Page not found :('),
-                  ),
+      child: BlocBuilder<SettingsCubit, Map<String, bool>>(
+        builder: (context, state) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Diresto App',
+          theme: (state['isDarkMode'] ?? false) ? darkMode : lightMode,
+          home: const SplashScreen(),
+          navigatorObservers: [routeObserver],
+          onGenerateRoute: (settings) {
+            switch (settings.name) {
+              case HomeScreen.routeName:
+                return MaterialPageRoute(builder: (_) => const HomeScreen());
+              case ListRestaurantScreen.routeName:
+                return MaterialPageRoute(
+                    builder: (_) => const ListRestaurantScreen());
+              case DetailRestaurantScreen.routeName:
+                final id = settings.arguments as String;
+                return MaterialPageRoute(
+                  builder: (_) => DetailRestaurantScreen(id: id),
+                  settings: settings,
                 );
-              });
-          }
-        },
+              case SearchScreen.routeName:
+                return MaterialPageRoute(builder: (_) => const SearchScreen());
+              case SettingsScreen.routeName:
+                return MaterialPageRoute(
+                    builder: (_) => const SettingsScreen());
+              case FavoriteScreen.routeName:
+                return MaterialPageRoute(
+                    builder: (_) => const FavoriteScreen());
+              default:
+                return MaterialPageRoute(builder: (_) {
+                  return const Scaffold(
+                    body: Center(
+                      child: Text('Page not found :('),
+                    ),
+                  );
+                });
+            }
+          },
+        ),
       ),
     );
   }

@@ -19,7 +19,7 @@ class SettingsScreen extends StatelessWidget {
           style: TextStyles.title,
         ),
       ),
-      body: BlocBuilder<SettingsCubit, bool>(
+      body: BlocBuilder<SettingsCubit, Map<String, bool>>(
         builder: (context, state) {
           return Column(
             children: [
@@ -29,7 +29,7 @@ class SettingsScreen extends StatelessWidget {
                   style: TextStyles.body,
                 ),
                 trailing: Switch.adaptive(
-                  value: state,
+                  value: state['isScheduled'] ?? false,
                   onChanged: (value) {
                     if (Platform.isIOS) {
                       customDialog(context);
@@ -37,6 +37,18 @@ class SettingsScreen extends StatelessWidget {
                       BlocProvider.of<SettingsCubit>(context)
                           .scheduledRestaurant(value);
                     }
+                  },
+                ),
+              ),
+              ListTile(
+                title: Text(
+                  'Dark mode',
+                  style: TextStyles.body,
+                ),
+                trailing: Switch.adaptive(
+                  value: state['isDarkMode'] ?? false,
+                  onChanged: (value) {
+                    context.read<SettingsCubit>().toggleTheme(value);
                   },
                 ),
               ),
