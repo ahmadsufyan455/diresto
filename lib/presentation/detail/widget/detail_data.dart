@@ -1,16 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:diresto/data/model/detail_restaurant.dart';
-import 'package:diresto/data/model/review.dart';
-import 'package:diresto/presentation/detail/bloc/add_review_bloc.dart';
-import 'package:diresto/presentation/detail/bloc/detail_restaurant_bloc.dart';
 import 'package:diresto/presentation/detail/widget/button_favorite.dart';
 import 'package:diresto/presentation/detail/widget/item_menu.dart';
 import 'package:diresto/presentation/detail/widget/item_review.dart';
-import 'package:diresto/presentation/detail/widget/review_textfield.dart';
+import 'package:diresto/presentation/detail/widget/review_form.dart';
 import 'package:diresto/utils/constants.dart';
 import 'package:diresto/utils/text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:readmore/readmore.dart';
 
 class DetailData extends StatelessWidget {
@@ -201,126 +197,11 @@ class DetailData extends StatelessWidget {
                       Row(
                         children: [
                           ElevatedButton(
-                            onPressed: () => showModalBottomSheet(
+                            onPressed: () => showReviewForm(
                               context: context,
-                              builder: (context) => Padding(
-                                padding: MediaQuery.of(context).viewInsets,
-                                child: SingleChildScrollView(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 16.0,
-                                      vertical: 8.0,
-                                    ),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              'Add review',
-                                              style: TextStyles.body.copyWith(
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            IconButton(
-                                              onPressed: () =>
-                                                  Navigator.pop(context),
-                                              icon: const Icon(
-                                                  Icons.close_rounded),
-                                            )
-                                          ],
-                                        ),
-                                        const SizedBox(height: 16.0),
-                                        ReviewTextField(
-                                          hint: 'Name',
-                                          controller: nameController,
-                                          textInputAction: TextInputAction.next,
-                                        ),
-                                        const SizedBox(height: 10.0),
-                                        ReviewTextField(
-                                          hint: 'Review',
-                                          maxLines: 4,
-                                          controller: reviewController,
-                                          textInputAction: TextInputAction.done,
-                                        ),
-                                        const SizedBox(height: 10.0),
-                                        BlocConsumer<AddReviewBloc,
-                                            AddReviewState>(
-                                          listener: (context, state) {
-                                            if (state is AddReviewSuccess) {
-                                              Navigator.pop(context);
-                                              BlocProvider.of<
-                                                          DetailRestaurantBloc>(
-                                                      context)
-                                                  .add(LoadDetailRestaurant(
-                                                      id: data.id));
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  duration: const Duration(
-                                                    seconds: 1,
-                                                  ),
-                                                  content: Text(
-                                                    'Your review has been added',
-                                                    style: TextStyles.body,
-                                                  ),
-                                                ),
-                                              );
-                                            } else if (state
-                                                is AddReviewError) {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  duration: const Duration(
-                                                    seconds: 1,
-                                                  ),
-                                                  content: Text(
-                                                    state.message,
-                                                    style: TextStyles.body,
-                                                  ),
-                                                ),
-                                              );
-                                            }
-                                          },
-                                          builder: (context, state) {
-                                            if (state is AddReviewLoading) {
-                                              return const Center(
-                                                child:
-                                                    CircularProgressIndicator(),
-                                              );
-                                            }
-                                            return ElevatedButton(
-                                              onPressed: () {
-                                                final requestData =
-                                                    RequestReview(
-                                                  id: data.id,
-                                                  name: nameController.text,
-                                                  review: reviewController.text,
-                                                ).toJson();
-                                                BlocProvider.of<AddReviewBloc>(
-                                                        context)
-                                                    .add(
-                                                  AddCustomerReview(
-                                                    data: requestData,
-                                                  ),
-                                                );
-                                              },
-                                              child: Text(
-                                                'Add Review',
-                                                style: TextStyles.body,
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              id: data.id,
+                              nameController: nameController,
+                              reviewController: reviewController,
                             ),
                             child: Row(
                               children: [
@@ -356,4 +237,23 @@ class DetailData extends StatelessWidget {
       ],
     );
   }
+}
+
+void showReviewForm({
+  required BuildContext context,
+  required String id,
+  required TextEditingController nameController,
+  required TextEditingController reviewController,
+}) {
+  showModalBottomSheet(
+    context: context,
+    builder: (context) => Padding(
+      padding: MediaQuery.of(context).viewInsets,
+      child: ReviewForm(
+        id: id,
+        nameController: nameController,
+        reviewController: reviewController,
+      ),
+    ),
+  );
 }
