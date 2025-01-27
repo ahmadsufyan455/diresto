@@ -16,6 +16,10 @@ class ListRestaurantScreen extends StatefulWidget {
 }
 
 class _ListRestaurantScreenState extends State<ListRestaurantScreen> {
+  Future<void> _onRefresh() async {
+    BlocProvider.of<RestaurantsBloc>(context).add(LoadRestaurants());
+  }
+
   @override
   void initState() {
     BlocProvider.of<RestaurantsBloc>(context).add(LoadRestaurants());
@@ -37,36 +41,39 @@ class _ListRestaurantScreenState extends State<ListRestaurantScreen> {
           ),
         ],
       ),
-      body: BlocBuilder<RestaurantsBloc, RestaurantsState>(
-        builder: (context, state) {
-          if (state is RestaurantsLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is RestaurantsLoaded) {
-            final data = state.data.restaurants;
-            return data.isEmpty
-                ? const EmptyData()
-                : ListView.builder(
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () => Navigator.pushNamed(
-                          context,
-                          DetailRestaurantScreen.routeName,
-                          arguments: data[index].id,
-                        ),
-                        child: ItemRestaurant(restaurant: data[index]),
-                      );
-                    },
-                  );
-          } else if (state is RestaurantsError) {
-            return ErrorData(
-              message: state.message,
-              onRefresh: () => BlocProvider.of<RestaurantsBloc>(context)
-                  .add(LoadRestaurants()),
-            );
-          }
-          return const SizedBox();
-        },
+      body: RefreshIndicator(
+        onRefresh: _onRefresh,
+        child: BlocBuilder<RestaurantsBloc, RestaurantsState>(
+          builder: (context, state) {
+            if (state is RestaurantsLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is RestaurantsLoaded) {
+              final data = state.data.restaurants;
+              return data.isEmpty
+                  ? const EmptyData()
+                  : ListView.builder(
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () => Navigator.pushNamed(
+                            context,
+                            DetailRestaurantScreen.routeName,
+                            arguments: data[index].id,
+                          ),
+                          child: ItemRestaurant(restaurant: data[index]),
+                        );
+                      },
+                    );
+            } else if (state is RestaurantsError) {
+              return ErrorData(
+                message: state.message,
+                onRefresh: () => BlocProvider.of<RestaurantsBloc>(context)
+                    .add(LoadRestaurants()),
+              );
+            }
+            return const SizedBox();
+          },
+        ),
       ),
     );
   }
